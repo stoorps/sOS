@@ -1,0 +1,5 @@
+gnome.gnome.Contacts
+org.gnome.clocks
+org.gnome.Logs
+org.gnome.Loupe
+org.gnome.Weather
