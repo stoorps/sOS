@@ -17,7 +17,7 @@ COPY build.sh /tmp/build.sh
 COPY build/ /tmp/build
 
 RUN mkdir -p /var/lib/alternatives && \
-    chmod +x flatpaks.sh \
+    chmod +x tmp/build/flatpaks.sh \
     /tmp/build.sh && \
     ostree container commit
     
