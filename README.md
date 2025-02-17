@@ -1,36 +1,4 @@
-# image-template
-
-# Purpose
-
-This repository is meant to be a template for building your own custom Universal Blue image. This template is the recommended way to make customizations to any image published by the Universal Blue Project:
-- [Aurora](https://getaurora.dev/)
-- [Bazzite](https://bazzite.gg/)
-- [Bluefin](https://projectbluefin.io/)
-- [uCore](https://projectucore.io/)
-- [main](https://github.com/ublue-os/main/)
-- [hwe](https://github.com/ublue-os/hwe/)
-
-or any other base image if you want to start from scratch:
-
-- Fedora: `quay.io/fedora/fedora-bootc:41`
-- CentOS Stream 9: `quay.io/centos-bootc/centos-bootc:stream9`
-- CentOS Stream 10 (in development): `quay.io/centos-bootc/centos-bootc:stream10`
-
-This template includes a Containerfile and a Github workflow for building the container image, signing, and proper metadata to be listed on [artifacthub](https://artifacthub.io/). As soon as the workflow is enabled in your repository, it will build the container image and push it to the Github Container Registry.
-
-# Prerequisites
-
-Working knowledge in the following topics:
-
-- Containers
-  - https://www.youtube.com/watch?v=SnSH8Ht3MIc
-  - https://www.mankier.com/5/Containerfile
-- bootc
-  - https://containers.github.io/bootc/
-- Fedora Silverblue (and other Fedora Atomic variants)
-  - https://docs.fedoraproject.org/en-US/fedora-silverblue/
-- Github Workflows
-  - https://docs.github.com/en/actions/using-workflows
+# sOS
 
 # How to Use
 
