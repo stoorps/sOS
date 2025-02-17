@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ouex pipefail
 
 # Check if the input file exists
 if [ -f "flatpaks.remove.txt" ]; then
