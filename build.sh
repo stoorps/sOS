@@ -11,12 +11,12 @@ set -ouex pipefail
 # this installs a package from fedora repos
 # dnf install -y tmux 
 
-chmod +x tmp/build/flatpaks.sh
-chmod +x tmp/build/dev.sh
+chmod +x /tmp/build/flatpaks.sh
+chmod +x /tmp/build/dev.sh
 
 
-./build/flatpaks.sh
-./build/dev.sh
+./tmp/build/flatpaks.sh
+./tmp/build/dev.sh
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
