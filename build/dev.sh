@@ -18,8 +18,10 @@ sed -i "s@Exec=zed@Exec=/usr/lib/zed.app/libexec/zed-editor@g" /usr/share/applic
 
 # Rust - Install in var to keep seperate from ostree
 echo "Installing rust via rustup..."
-mkdir /var/cargo
-chmod 777 /var/cargo
-CARGO_HOME=/var/cargo RUSTUP_HOME=/var/cargo bash -c 'curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain stable --profile default -y'
+mkdir /var/rust
+chmod 777 /var/rust
+CARGO_HOME=/var/rust RUSTUP_HOME=/var/rust bash -c 'curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain stable --profile default -y'
 # Add to global path.
 cp /tmp/build/etc/cargo.sh /etc/profile.d/cargo.sh
+
+

@@ -1,1 +1,1 @@
-export PATH="$PATH:/var/cargo/bin"
+export PATH="$PATH:/var/rust/bin"
