@@ -2,10 +2,6 @@
 
 # How to Use
 
-## Template
-
-Select `Use this Template` and create a new repository from it. To enable the workflows, you may need to go the `Actions` tab of the new repository and click to enable workflows.
-
 ## Containerfile
 
 This file defines the operations used to customize the selected image. It contains examples of possible modifications, including how to:
