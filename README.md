@@ -13,8 +13,7 @@ This file defines the operations used to customize the selected image. It contai
 
 Modify `iso.toml` to point to your custom image before generating an ISO.
 
-- (Steps in progress)
-
+X
 ## Workflows
 
 ### build.yml
