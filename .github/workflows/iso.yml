@@ -1,4 +1,4 @@
-name: Build m2os ISO
+name: Build ISO
 
 on:
   workflow_dispatch:
