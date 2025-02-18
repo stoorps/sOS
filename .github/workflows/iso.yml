@@ -1,0 +1,67 @@
+name: Build m2os ISO
+
+on:
+  workflow_dispatch:
+  #schedule: "41 6 * * 0" # Example schedule, adjust as needed
+
+env:
+  IMAGE_REGISTRY: ghcr.io/stoorps
+  IMAGE_NAME: sos
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}.iso
+  cancel-in-progress: true
+
+jobs:
+  build-iso:
+    name: Build sos.iso
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Just
+        uses: ./.github/actions/install-just
+      - name: Maximize Build Space
+        uses: ublue-os/remove-unwanted-software@v8
+      - name: Build ISO
+        shell: bash
+        run: |
+          sudo just build-iso sos 1 1  # Directly build "sos" image
+          tree "./${{ env.IMAGE_NAME }}_build/output/"
+      - name: Upload ISO and Checksum to Job Artifacts
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: sos-iso
+          path: ./${{ env.IMAGE_NAME }}_build/output/
+          if-no-files-found: warn
+          retention-days: 0
+          compression-level: 0
+          overwrite: true
+      - name: Make URL Artifact
+        shell: bash
+        id: url
+        run: |
+          echo "|[sos](${{ steps.upload.outputs.artifact-url }})|" > url-sos.txt
+          echo "url=sos" >> $GITHUB_OUTPUT
+      - name: Upload ISO URL for Changelogs
+        uses: actions/upload-artifact@v4
+        with:
+          name: url-sos
+          path: url-sos.txt
+          if-no-files-found: error
+          retention-days: 0
+          compression-level: 0
+          overwrite: true
+
+  changelogs:
+    name: Changelogs
+    uses: ./.github/workflows/changelogs.yml
+    secrets: inherit
+    needs: build-iso
+    with:
+      target: ${{ needs.build-iso.outputs.url }}
