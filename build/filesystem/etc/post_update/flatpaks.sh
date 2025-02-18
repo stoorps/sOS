@@ -33,14 +33,9 @@ if [ -f "/etc/post_update/flatpaks.install.txt" ]; then
     if [ -n "$app_name" ]; then
         echo "Installing: $app_name"
           set +e  # Disable -e (errexit)
-          flatpak install "$app_name" -y 
-          install_result=$?  # Store the exit code
+          flatpak install --system --noninteractive "$app_name"
           set -e  # Re-enable -e (errexit)
-        if [ $? -eq 0 ]; then
-            echo "Successfully installed: $app_name"
-        else
-            echo "Error installing: $app_name"
-        fi
+        
 
     fi
     done < "/etc/post_update/flatpaks.install.txt"
