@@ -1,0 +1,14 @@
+[Unit]
+Description=Run my update script once after reboot
+After=multi-user.target
+Wants=multi-user.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=no
+ExecStart=/path/to/my_update_script.sh
+# Condition to check if the script has already run
+ConditionPathExists=!/var/lib/my_update_script_ran
+
+[Install]
+WantedBy=multi-user.target

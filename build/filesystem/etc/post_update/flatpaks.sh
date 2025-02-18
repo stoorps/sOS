@@ -1,12 +1,8 @@
 #!/bin/bash
 set -oue pipefail
 
-# Add flathub
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
-
 # Check if the input file exists
-# if [ -f "/tmp/build/flatpaks.remove.txt" ]; then
+# if [ -f "/etc/post_update/flatpaks.remove.txt" ]; then
 #     # Read each line from the file
 #     while IFS= read -r app_name; do
 #     # Remove leading/trailing whitespace from the app name
@@ -23,11 +19,11 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 #         fi
 
 #     fi
-#     done < "/tmp/build/flatpaks.remove.txt"
+#     done < "/etc/post_update/flatpaks.remove.txt"
 # fi
 
 # Check if the input file exists
-if [ -f "/tmp/build/flatpaks.install.txt" ]; then
+if [ -f "/etc/post_update/flatpaks.install.txt" ]; then
     # Read each line from the file
     while IFS= read -r app_name; do
     # Remove leading/trailing whitespace from the app name
@@ -36,7 +32,10 @@ if [ -f "/tmp/build/flatpaks.install.txt" ]; then
     # Check if the app name is not empty
     if [ -n "$app_name" ]; then
         echo "Installing: $app_name"
-         flatpak install $app_name -y
+          set +e  # Disable -e (errexit)
+          flatpak install "$app_name" -y 
+          install_result=$?  # Store the exit code
+          set -e  # Re-enable -e (errexit)
         if [ $? -eq 0 ]; then
             echo "Successfully installed: $app_name"
         else
@@ -44,7 +43,7 @@ if [ -f "/tmp/build/flatpaks.install.txt" ]; then
         fi
 
     fi
-    done < "/tmp/build/flatpaks.install.txt"
+    done < "/etc/post_update/flatpaks.install.txt"
 fi
 
 exit 0

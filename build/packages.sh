@@ -80,4 +80,20 @@ tar -xvf /tmp/plugins.tar.xz -C /etc/vib --strip-components=1
 
 
 
+#====== Fonts =========
+curl -Lo /tmp/firamono.zip \
+  https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraMono.zip
+
+mkdir /usr/share/fonts/fira-mono-nerd-font
+unzip /tmp/firamono.zip -d /usr/share/fonts/fira-mono-nerd-font
+
+
+curl -Lo /tmp/adwaita.tar.xz \
+  https://download.gnome.org/sources/adwaita-fonts/48/adwaita-fonts-48.0.tar.xz
+
+mkdir /usr/share/fonts/adwaita-fonts-48.0
+tar -xvf /tmp/adwaita.tar.xz  -C /usr/share/fonts/adwaita-fonts-48.0 --strip-components=1
+
+
+
 exit 0

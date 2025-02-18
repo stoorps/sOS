@@ -4,18 +4,21 @@ set -oue pipefail
 mkdir -p /var/lib/alternatives
 
 chmod +x /tmp/build/packages.sh
-chmod +x /tmp/build/flatpaks.sh
+chmod +x /tmp/build/setup_post_update.sh
+
+
+ echo "::group:: ===Setup post-update service==="
+ ./tmp/build/setup_post_update.sh
+ echo "::endgroup::"
 
 echo "::group:: ===Add/Remove Packages==="
 ./tmp/build/packages.sh
+
 echo "::endgroup::"
 
-echo "::group:: ===Add/Remove Flatpaks==="
-./tmp/build/flatpaks.sh
-echo "::endgroup::"
+
 
 # Add custom profiles.
-cp /tmp/build/etc/custom.sh /etc/profile.d/custom.sh 
 ### Install packages
 
 # Packages can be installed from any enabled yum repo on the image.
