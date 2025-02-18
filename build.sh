@@ -1,5 +1,24 @@
 #!/bin/bash
-set -ouex pipefail
+set -oue pipefail
+
+mkdir -p /var/lib/alternatives
+
+chmod +x /tmp/build/flatpaks.sh
+chmod +x /tmp/build/packages.sh
+chmod +x /tmp/build/dev.sh
+
+echo "::group:: ===Add/Remove Flatpaks==="
+./tmp/build/flatpaks.sh
+echo "::endgroup::"
+
+echo "::group:: ===Add/Remove Packages==="
+./tmp/build/packages.sh
+echo "::endgroup::"
+
+echo "::group:: ===Setup Developer Tools==="
+./tmp/build/dev.sh
+echo "::endgroup::"
+
 
 ### Install packages
 
@@ -11,12 +30,6 @@ set -ouex pipefail
 # this installs a package from fedora repos
 # dnf install -y tmux 
 
-chmod +x /tmp/build/flatpaks.sh
-chmod +x /tmp/build/dev.sh
-
-
-./tmp/build/flatpaks.sh
-./tmp/build/dev.sh
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
@@ -26,4 +39,4 @@ chmod +x /tmp/build/dev.sh
 
 #### Example for enabling a System Unit File
 
-systemctl enable podman.socket
+#systemctl enable podman.socket

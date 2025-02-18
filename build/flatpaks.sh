@@ -1,6 +1,9 @@
 #!/bin/bash
 set -ouex pipefail
 
+# Add flathub
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
 # Check if the input file exists
 if [ -f "flatpaks.remove.txt" ]; then
     # Read each line from the file
@@ -32,7 +35,7 @@ if [ -f "flatpaks.install.txt" ]; then
     # Check if the app name is not empty
     if [ -n "$app_name" ]; then
         echo "Uninstalling: $app_name"
-        flatpak uninstall "$app_name" -y
+        flatpak install "$app_name" -y
         if [ $? -eq 0 ]; then
             echo "Successfully installed: $app_name"
         else
@@ -42,7 +45,5 @@ if [ -f "flatpaks.install.txt" ]; then
     fi
     done < "flatpaks.install.txt"
 fi
-
-echo "Flatpaks complete"
 
 exit 0

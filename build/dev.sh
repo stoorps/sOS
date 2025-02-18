@@ -1,7 +1,8 @@
 #!/bin/bash
-set -ouex pipefail
+set -oue pipefail
 
-# Zed Editor
+
+# ======== Zed Editor =========
 echo "Installing zed..."
 curl -Lo /tmp/zed.tar.gz \
     https://zed.dev/api/releases/stable/latest/zed-linux-x86_64.tar.gz
@@ -16,12 +17,31 @@ cp {/usr/lib/zed.app,/usr}/share/icons/hicolor/1024x1024/apps/zed.png
 sed -i "s@Exec=zed@Exec=/usr/lib/zed.app/libexec/zed-editor@g" /usr/share/applications/dev.zed.Zed.desktop
 
 
-# Rust - Install in var to keep seperate from ostree
+# ======== Rust =========
 echo "Installing rust via rustup..."
 mkdir /var/rust
-chmod 777 /var/rust
-CARGO_HOME=/var/rust RUSTUP_HOME=/var/rust bash -c 'curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain stable --profile default -y'
+chmod 777 /var/rust #IMPORTANT!!!! Temporary for installation
+
+useradd -m cargoInstaller
+su cargoInstaller -c 'curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | CARGO_HOME=/var/rust RUSTUP_HOME=/var/rust sh -s -- --default-toolchain stable --profile default -y'
+
+chmod -R 750 /var/rust #IMPORTANT!!!! Undo temporary for installation.
+
+userdel -r cargoInstaller
+ls /home | cat 
 # Add to global path.
 cp /tmp/build/etc/cargo.sh /etc/profile.d/cargo.sh
 
 
+# ======== VS Code =========
+echo "installing vscode"
+
+rpm --import https://packages.microsoft.com/keys/microsoft.asc
+echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+
+dnf5 -y install code
+
+
+# ======== Starship =========
+mkdir /var/starship
+curl -sS https://starship.rs/install.sh | sh -s -- --force --bin-dir /var/starship

@@ -16,7 +16,6 @@ FROM ghcr.io/ublue-os/cosmic-nvidia:41
 COPY build.sh /tmp/build.sh
 COPY build/ /tmp/build
 
-RUN mkdir -p /var/lib/alternatives && \
-    /tmp/build.sh && \
+RUN  /tmp/build.sh && \
     ostree container commit
     
