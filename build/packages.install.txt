@@ -2,3 +2,4 @@ zsh
 gnome-themes-extra
 nerd-fonts
 code
+cmake
