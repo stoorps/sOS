@@ -2,8 +2,8 @@
 set -ouex pipefail
 
 # Uninstall packages
-if [ -f "packages.remove.txt" ]; then
-  packages_remove=$(cat "packages.remove.txt" | xargs)  # Read all packages into a single string
+if [ -f "/tmp/build/packages.remove.txt" ]; then
+  packages_remove=$(cat "/tmp/build/packages.remove.txt" | xargs)  # Read all packages into a single string
   if [ -n "$packages_remove" ]; then # Check if there are packages to remove
     echo "Uninstalling packages: $packages_remove"
     dnf uninstall -y $packages_remove
@@ -16,8 +16,8 @@ if [ -f "packages.remove.txt" ]; then
 fi
 
 # Install packages
-if [ -f "packages.install.txt" ]; then
-  packages_install=$(cat "packages.install.txt" | xargs) # Read all packages into a single string
+if [ -f "/tmp/build/packages.install.txt" ]; then
+  packages_install=$(cat "/tmp/build/packages.install.txt" | xargs) # Read all packages into a single string
   if [ -n "$packages_install" ]; then # Check if there are packages to install
     echo "Installing packages: $packages_install"
     dnf install -y $packages_install

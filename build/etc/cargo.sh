@@ -1,1 +1,1 @@
-export PATH="$PATH:/var/rust/bin"
+export PATH="$PATH:/etc/rust"

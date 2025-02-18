@@ -3,17 +3,21 @@ set -oue pipefail
 
 mkdir -p /var/lib/alternatives
 
+flatpak list | cat
+
 chmod +x /tmp/build/flatpaks.sh
 chmod +x /tmp/build/packages.sh
 chmod +x /tmp/build/dev.sh
+
+echo "::group:: ===Add/Remove Packages==="
+./tmp/build/packages.sh
+echo "::endgroup::"
 
 echo "::group:: ===Add/Remove Flatpaks==="
 ./tmp/build/flatpaks.sh
 echo "::endgroup::"
 
-echo "::group:: ===Add/Remove Packages==="
-./tmp/build/packages.sh
-echo "::endgroup::"
+
 
 echo "::group:: ===Setup Developer Tools==="
 ./tmp/build/dev.sh
