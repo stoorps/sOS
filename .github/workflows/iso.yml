@@ -58,10 +58,10 @@ jobs:
           compression-level: 0
           overwrite: true
 
-  changelogs:
-    name: Changelogs
-    uses: ./.github/workflows/changelogs.yml
-    secrets: inherit
-    needs: build-iso
-    with:
-      target: ${{ needs.build-iso.outputs.url }}
+  # changelogs:
+  #   name: Changelogs
+  #   uses: ./.github/workflows/changelogs.yml
+  #   secrets: inherit
+  #   needs: build-iso
+  #   with:
+  #     target: ${{ needs.build-iso.outputs.url }}
