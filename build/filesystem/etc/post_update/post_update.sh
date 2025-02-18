@@ -6,7 +6,7 @@ if [ ! -f /etc/post_update/post_update.flag ]; then
     exit 0
 fi
 
-./tmp/build/flatpaks.sh
+./etc/post_update/flatpaks.sh
 
 # Delete the flag. 
 rm -f /etc/post_update/post_update.flag 
