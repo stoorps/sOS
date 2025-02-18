@@ -25,6 +25,8 @@ chmod 777 /var/rust #IMPORTANT!!!! Temporary for installation
 useradd -m cargoInstaller
 su cargoInstaller -c 'curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | CARGO_HOME=/var/rust RUSTUP_HOME=/var/rust sh -s -- --default-toolchain stable --profile default -y'
 
+su root
+
 chmod -R 750 /var/rust #IMPORTANT!!!! Undo temporary for installation.
 
 userdel -r cargoInstaller
