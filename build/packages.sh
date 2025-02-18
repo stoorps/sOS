@@ -1,6 +1,13 @@
 #!/bin/bash
 set -ouex pipefail
 
+dnf5 -y copr enable che/nerd-fonts
+
+# VS Code Repo
+rpm --import https://packages.microsoft.com/keys/microsoft.asc
+echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | tee /etc/yum.repos.d/vscode.repo > /dev/null
+# installs in packages.install.txt
+
 # Uninstall packages
 if [ -f "/tmp/build/packages.remove.txt" ]; then
   packages_remove=$(cat "/tmp/build/packages.remove.txt" | xargs)  # Read all packages into a single string
@@ -28,5 +35,49 @@ if [ -f "/tmp/build/packages.install.txt" ]; then
     fi
   fi
 fi
+
+
+
+# ======== Zed Editor =========
+echo "Installing zed..."
+curl -Lo /tmp/zed.tar.gz \
+    https://zed.dev/api/releases/stable/latest/zed-linux-x86_64.tar.gz
+mkdir -p /usr/lib/zed.app/
+tar -xvf /tmp/zed.tar.gz -C /usr/lib/zed.app/ --strip-components=1
+chown 0:0 -R /usr/lib/zed.app
+ln -s /usr/lib/zed.app/bin/zed /usr/bin/zed-cli
+cp /usr/lib/zed.app/share/applications/zed.desktop /usr/share/applications/dev.zed.Zed.desktop
+mkdir -p /usr/share/icons/hicolor/1024x1024/apps
+cp {/usr/lib/zed.app,/usr}/share/icons/hicolor/512x512/apps/zed.png
+cp {/usr/lib/zed.app,/usr}/share/icons/hicolor/1024x1024/apps/zed.png
+sed -i "s@Exec=zed@Exec=/usr/lib/zed.app/libexec/zed-editor@g" /usr/share/applications/dev.zed.Zed.desktop
+
+
+# ======== Rust =========
+echo "Installing rust via rustup..."
+mkdir /etc/rust
+chmod 777 /etc/rust #IMPORTANT!!!! Temporary for installation
+useradd -m cargoInstaller
+su cargoInstaller -c 'curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | CARGO_HOME=/etc/rust RUSTUP_HOME=/etc/rust sh -s -- --default-toolchain stable --profile default -y'
+chmod -R 750 /etc/rust #IMPORTANT!!!! Undo temporary for installation.
+userdel -r cargoInstaller
+
+
+# ======== Starship =========
+mkdir /etc/starship
+curl -sS https://starship.rs/install.sh | sh -s -- --force --bin-dir /etc/starship
+
+
+# ======== Vib =========
+mkdir /etc/vib
+curl -Lo /etc/vib/vib \
+     https://github.com/Vanilla-OS/Vib/releases/latest/download/vib
+chmod +x /etc/vib/vib
+
+curl -Lo /tmp/plugins.tar.xz \
+     https://github.com/Vanilla-OS/Vib/releases/latest/download/plugins.tar.xz
+tar -xvf /tmp/plugins.tar.xz -C /etc/vib --strip-components=1
+
+
 
 exit 0

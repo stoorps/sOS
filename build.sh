@@ -3,11 +3,8 @@ set -oue pipefail
 
 mkdir -p /var/lib/alternatives
 
-flatpak list | cat
-
-chmod +x /tmp/build/flatpaks.sh
 chmod +x /tmp/build/packages.sh
-chmod +x /tmp/build/dev.sh
+chmod +x /tmp/build/flatpaks.sh
 
 echo "::group:: ===Add/Remove Packages==="
 ./tmp/build/packages.sh
@@ -17,13 +14,8 @@ echo "::group:: ===Add/Remove Flatpaks==="
 ./tmp/build/flatpaks.sh
 echo "::endgroup::"
 
-
-
-echo "::group:: ===Setup Developer Tools==="
-./tmp/build/dev.sh
-echo "::endgroup::"
-
-
+# Add custom profiles.
+cp /tmp/build/etc/custom.sh /etc/profile.d/custom.sh 
 ### Install packages
 
 # Packages can be installed from any enabled yum repo on the image.
