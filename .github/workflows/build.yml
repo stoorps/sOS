@@ -90,7 +90,7 @@ jobs:
       - uses: vanilla-os/vib-gh-action@v0.7.0
         with:
           recipe: "vib.yml"
-          plugins: "stoorps/vib-api:v0.0.1"
+          plugins: "stoorps/vib-plugins:v0.0.1"
 
       # - name: Build Image
       #   id: build_image
