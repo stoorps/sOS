@@ -4,3 +4,4 @@ Containerfile
 includes.container/*
 data.json
 
+plugins/*
