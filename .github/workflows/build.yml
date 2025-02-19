@@ -93,9 +93,11 @@ jobs:
           recipe: "vib.yml"
           plugins: "stoorps/vib-plugins:v0.0.1"
 
-      - name: Prepend includes
-        run: sed -i '1i FROM ghcr.io/ublue-os/cosmic-nvidia:41 AS include\n\nCOPY includes.container/. /\n\n' Containerfile
-
+      # HACK: not sure where includes.container are supposed to be 
+      - name: Preappend includes
+        run: |
+          sed -i 's/FROM ghcr.io\/ublue-os\/cosmic-nvidia:41 AS build/FROM ghcr.io\/ublue-os\/cosmic-nvidia:41 AS build\nCOPY includes.container\/. \//' Containerfile
+    
       - name: Build Image
         id: build_image
         uses: redhat-actions/buildah-build@v2
