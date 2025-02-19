@@ -1,4 +1,6 @@
 cosign.key
 _build_*
 Containerfile
-includes.container/etc/systemd/silverblue-packages-setup.service
+includes.container/*
+data.json
+

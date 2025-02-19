@@ -2,8 +2,7 @@ name: install-flatpaks
 type: ostree-pkg
 manager: flatpak
 on: boot
-args: 
-  - --system
+as: user
 packages:
   - app.zen_browser.zen
   - com.github.IsmaelMartinez.teams_for_linux

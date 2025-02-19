@@ -3,8 +3,7 @@ type: ostree-pkg
 manager: flatpak
 action: uninstall
 on: boot
-args: 
-  - --system
+as: user
 packages:
   - org.gnome.Contacts
   - org.gnome.clocks

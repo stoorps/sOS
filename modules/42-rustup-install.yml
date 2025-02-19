@@ -1,9 +1,5 @@
 name: rustup-install
-type: shell
+type: boot-shell
+as: user
 commands:
-  - mkdir /etc/rust
-  - chmod 777 /etc/rust #IMPORTANT!!!! Temporary for installation
-  - useradd -m cargoInstaller
-  - su cargoInstaller -c 'curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | CARGO_HOME=/etc/rust RUSTUP_HOME=/etc/rust sh -s -- --default-toolchain stable --profile default -y'
-  - chmod -R 750 /etc/rust #IMPORTANT!!!! Undo temporary for installation.
-  - userdel -r cargoInstaller
+  - curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs |sh -s -- --default-toolchain stable --profile default -y

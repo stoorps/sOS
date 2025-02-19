@@ -1,8 +1,7 @@
 name: install-zed
 type: shell
 commands:
-  - curl -Lo /tmp/zed.tar.gz \
-  - https://zed.dev/api/releases/stable/latest/zed-linux-x86_64.tar.gz
+  - curl -Lo /tmp/zed.tar.gz https://zed.dev/api/releases/stable/latest/zed-linux-x86_64.tar.gz
   - mkdir -p /usr/lib/zed.app/
   - tar -xvf /tmp/zed.tar.gz -C /usr/lib/zed.app/ --strip-components=1
   - chown 0:0 -R /usr/lib/zed.app

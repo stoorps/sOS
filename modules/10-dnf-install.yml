@@ -10,3 +10,4 @@ packages:
   - code
   - cmake
   - gcc
+  - util-linux
