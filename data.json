@@ -1,0 +1,81 @@
+{
+    {
+        "action": "add_remote",
+        "manager": "dnf5",
+        "name": "enable-coprs",
+        "on": "build",
+        "remotes": [
+            "che/nerd-fonts"
+        ],
+        "type": "ostree-pkg"
+    },
+    {
+        "Name": "sos",
+        "Id": "build-image",
+        "Vibversion": "1.0.0",
+        "Stages": [
+            {
+                "id": "build",
+                "base": "ghcr.io/ublue-os/cosmic-nvidia:41",
+                "copy": null,
+                "addincludes": false,
+                "labels": {
+                    "maintainer": "stoorps"
+                },
+                "env": null,
+                "adds": null,
+                "args": null,
+                "runs": {
+                    "Commands": [
+                        "mkdir -p /var/lib/alternatives"
+                    ],
+                    "Workdir": ""
+                },
+                "expose": null,
+                "cmd": {
+                    "Exec": null,
+                    "Workdir": ""
+                },
+                "modules": [
+                    {
+                        "includes": [
+                            "modules/00-dnf-copr-enable.yml",
+                            "modules/01-dnf-vscode-repo.yml",
+                            "modules/10-dnf-install.yml",
+                            "modules/11-zed-install.yml",
+                            "modules/12-fonts-install.yml",
+                            "modules/20-flatpaks-flathub-repo.yml",
+                            "modules/30-flatpaks-remove.yml",
+                            "modules/31-flatpaks-install.yml",
+                            "modules/40-zsh-setup.yml",
+                            "modules/41-starship-install.yml",
+                            "modules/42-rustup-install.yml",
+                            "modules/43-vib-install.yml"
+                        ],
+                        "name": "build",
+                        "type": "includes"
+                    },
+                    {
+                        "commands": [
+                            "ostree container commit"
+                        ],
+                        "name": "commit",
+                        "type": "shell"
+                    }
+                ],
+                "Entrypoint": {
+                    "Exec": null,
+                    "Workdir": ""
+                }
+            }
+        ],
+        "Path": "/var/home/stoorps/repos/sOS/vib.yml",
+        "ParentPath": "/var/home/stoorps/repos/sOS",
+        "DownloadsPath": "/var/home/stoorps/repos/sOS/downloads",
+        "SourcesPath": "/var/home/stoorps/repos/sOS/sources",
+        "IncludesPath": "includes.container",
+        "PluginPath": "/var/home/stoorps/repos/sOS/plugins",
+        "Containerfile": "/var/home/stoorps/repos/sOS/Containerfile",
+        "Finalize": null
+    }
+}

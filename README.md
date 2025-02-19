@@ -1,6 +1,5 @@
 # sOS
 
-# Post install
+My own ublue-based OS image with Cosmic DE, and defined with vib.
 
- Add the following to the end of `~/.zshrc`:
-```eval "$(starship init zsh)"```
+This is still a WIP. 

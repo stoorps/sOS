@@ -1,0 +1,35 @@
+name: sos
+id: sos
+vibversion: 1.0.0
+stages:
+  - id: build
+    base: ghcr.io/ublue-os/cosmic-nvidia:41
+    singlelayer: false
+    labels:
+      maintainer: stoorps
+
+    # Commands to run first before building the modules
+    runs:
+      commands:
+        - mkdir -p /var/lib/alternatives
+
+    modules:
+    - name: build
+      type: includes
+      includes:
+        - modules/00-dnf-copr-enable.yml
+        - modules/01-dnf-vscode-repo.yml
+        - modules/10-dnf-install.yml
+        - modules/11-zed-install.yml
+        - modules/12-fonts-install.yml
+        - modules/13-vib-install.yml
+        - modules/20-flatpaks-flathub-repo.yml
+        - modules/30-flatpaks-remove.yml
+        - modules/31-flatpaks-install.yml
+        - modules/40-zsh-setup.yml
+        - modules/41-starship-install.yml
+        - modules/42-rustup-install.yml
+    - name: commit
+      type: shell
+      commands:
+          - ostree container commit

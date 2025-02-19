@@ -1,5 +1,0 @@
-app.zen_browser.zen
-com.github.IsmaelMartinez.teams_for_linux
-com.discordapp.Discord
-com.valvesoftware.Steam
-io.appflowy.AppFlowy

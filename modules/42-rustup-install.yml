@@ -1,0 +1,5 @@
+name: rustup-install
+type: boot-shell
+as: user
+commands:
+  - curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs |sh -s -- --default-toolchain stable --profile default -y

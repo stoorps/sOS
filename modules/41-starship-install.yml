@@ -1,0 +1,7 @@
+name: starship-install
+type: boot-shell
+as: user
+commands:
+  - curl -sS https://starship.rs/install.sh | sh -s -- --force --bin-dir ~/.local/bin/
+  - echo 'eval "$(starship init bash)"' >> ~/.bashrc
+  - echo 'eval "$(starship init zsh)"' >> ~/.zshrc

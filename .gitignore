@@ -1,2 +1,6 @@
 cosign.key
 _build_*
+Containerfile
+includes.container/*
+data.json
+

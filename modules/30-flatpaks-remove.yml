@@ -1,0 +1,13 @@
+name: install-flatpaks
+type: ostree-pkg
+manager: flatpak
+action: uninstall
+on: boot
+as: user
+packages:
+  - org.gnome.Contacts
+  - org.gnome.clocks
+  - org.gnome.Logs
+  - org.gnome.Loupe
+  - org.gnome.Weather
+  - org.mozilla.firefox

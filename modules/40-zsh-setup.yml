@@ -1,0 +1,5 @@
+name: zsh-setup
+type: boot-shell
+as: user
+commands:
+  - chsh -s $(which zsh)

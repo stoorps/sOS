@@ -1,0 +1,6 @@
+name: flathub-repo
+type: ostree-pkg
+manager: flatpak
+action: add_remote
+on: boot
+remote: "flathub https://dl.flathub.org/repo/flathub.flatpakrepo"

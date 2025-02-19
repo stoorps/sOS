@@ -1,0 +1,13 @@
+name: install-packages
+type: ostree-pkg
+manager: dnf
+action: install
+on: build
+packages: 
+  - zsh
+  - gnome-themes-extra
+  - nerd-fonts
+  - code
+  - cmake
+  - gcc
+  - util-linux
