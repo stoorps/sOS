@@ -1,0 +1,6 @@
+name: starship-install
+type: shell
+commands:
+  - mkdir /etc/starship
+  - curl -sS https://starship.rs/install.sh | sh -s -- --force --bin-dir /etc/starship
+

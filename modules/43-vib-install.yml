@@ -1,0 +1,11 @@
+name: vib-install
+type: shell
+commands:
+  - mkdir /etc/vib
+  - curl -Lo /etc/vib/vib \
+        https://github.com/Vanilla-OS/Vib/releases/latest/download/vib
+  - chmod +x /etc/vib/vib
+
+  - curl -Lo /tmp/plugins.tar.xz \
+        https://github.com/Vanilla-OS/Vib/releases/latest/download/plugins.tar.xz
+  - tar -xvf /tmp/plugins.tar.xz -C /etc/vib --strip-components=1

@@ -1,0 +1,7 @@
+name: enable-coprs
+type: ostree-pkg
+manager: dnf5
+action: add_remote
+on: build
+remotes: 
+  - che/nerd-fonts

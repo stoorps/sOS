@@ -1,0 +1,14 @@
+
+[Unit]
+Description=Install Packages after boot
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/etc/silverblue-pakages
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=default.target
