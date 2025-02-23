@@ -98,18 +98,18 @@ jobs:
       #   run: |
       #     sed -i 's/FROM ghcr.io\/ublue-os\/cosmic-nvidia:41 AS build/FROM ghcr.io\/ublue-os\/cosmic-nvidia:41 AS build\nCOPY includes.container\/. \//' Containerfile
     
-      # - name: Build Image
-      #   id: build_image
-      #   uses: redhat-actions/buildah-build@v2
-      #   with:
-      #     containerfiles: |
-      #       ./Containerfile
-      #     # Postfix image name with -custom to make it a little more descriptive
-      #     # Syntax: https://docs.github.com/en/actions/learn-github-actions/expressions#format
-      #     image: ${{ env.IMAGE_NAME }}
-      #     tags: ${{ steps.metadata.outputs.tags }}
-      #     labels: ${{ steps.metadata.outputs.labels }}
-      #     oci: false
+      - name: Build Image
+        id: build_image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          containerfiles: |
+            ./Containerfile
+          # Postfix image name with -custom to make it a little more descriptive
+          # Syntax: https://docs.github.com/en/actions/learn-github-actions/expressions#format
+          image: ${{ env.IMAGE_NAME }}
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
+          oci: false
 
       # Rechunk is a script that we use on Universal Blue to make sure there isnt a single huge layer when your image gets published.
       # This does not make your image faster to download, just provides better resumability and fixes a few errors.
@@ -136,11 +136,11 @@ jobs:
       #     done
 
 
-      - name: Load in podman and tag
-        run: |
-          for tag in ${{ steps.metadata.outputs.tags }}; do
-            podman tag $IMAGE ${{ env.IMAGE_NAME }}:$tag
-          done
+      # - name: Load in podman and tag
+      #   run: |
+      #     for tag in ${{ steps.metadata.outputs.tags }}; do
+      #       podman tag $IMAGE ${{ env.IMAGE_NAME }}:$tag
+      #     done
 
 
 
