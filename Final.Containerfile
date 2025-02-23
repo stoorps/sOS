@@ -1,1 +1,1 @@
-FROM sos-intermediate:latest AS build
+FROM sos-intermediate AS build
