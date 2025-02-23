@@ -102,8 +102,9 @@ jobs:
         id: build_image
         uses: redhat-actions/buildah-build@v2
         with:
-          containerfiles: |
-            ./Final.Containerfile
+          base-image: localhost/sos-intermediate
+          # containerfiles: |
+          #   ./Final.Containerfile
           # Postfix image name with -custom to make it a little more descriptive
           # Syntax: https://docs.github.com/en/actions/learn-github-actions/expressions#format
           image: ${{ env.IMAGE_NAME }}
