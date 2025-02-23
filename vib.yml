@@ -1,5 +1,5 @@
-name: sos
-id: sos
+name: sos-intermediate
+id: sos-intermediate
 vibversion: 1.0.0
 stages:
   - id: build
